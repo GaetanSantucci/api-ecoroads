@@ -43,8 +43,8 @@ async function findOneUserProfile(userData, columnName) {
         'street_number', public.location.street_number, 
         'zipcode', public.location.zipcode, 
         'city', public.location.city,
-        'lat', public.location.lat,
-        'lon', public.location.lon) AS location 
+        'Lat', public.location.lat,
+        'Long', public.location.lon) AS location 
         FROM public."location"
         JOIN public."user" ON public."user".location_id = public.location.id 
         WHERE public."user".${columnName} = $1),
@@ -59,10 +59,10 @@ async function findOneUserProfile(userData, columnName) {
         FROM public."${TABLE_NAME}" 
         WHERE public."user".${columnName}= $1;`,
         values: [userData],
-    }; 
+    };
 
     const result = await pool.query(queryPrepared);
-    
+
     return result;
 }
 
@@ -82,7 +82,7 @@ async function createData(userData) {
                 location.zipcode,
                 location.city,
                 location.Lat,
-                location.Long
+                location.Long,
             ],
         };
         await pool.query(queryPreparedLocation);
@@ -105,7 +105,7 @@ async function createData(userData) {
                 ("email","password","username",location_id, "car_id")
                 VALUES
                 ($1,$2,$3,$4,$5);`,
-            values: [email, password, username, location, car_id]
+            values: [email, password, username, location, car_id],
         };
         await pool.query(queryPrepared);
     }
@@ -138,7 +138,7 @@ async function updateData(userId, userData) {
                 "car_id" = COALESCE (( $5 )::INT, "car_id"),
                 "updated_at" = NOW()
             WHERE "id" = $6;`,
-        values: [email, password, username, location, car_id, userId ]
+        values: [email, password, username, location, car_id, userId],
     };
     const result = await pool.query(sql);
     return result.rowCount;
