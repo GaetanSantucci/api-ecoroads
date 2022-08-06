@@ -28,7 +28,7 @@ async function findCategoryByUser(userId) {
 }
 
 async function findCategory(categories) {
-    const result = await pool.query(`SELECT c.name FROM category AS c  WHERE c.id IN ($1, $2, $3);`, [categories[0], categories[1], categories[2]])
+    const result = await pool.query(`SELECT * FROM category AS c  WHERE c.id IN ($1, $2, $3);`, [categories[0], categories[1], categories[2]])
     return result.rows
 }
 
