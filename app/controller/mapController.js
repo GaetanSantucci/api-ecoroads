@@ -48,8 +48,8 @@ async function createMap(req, res) {
             },
             userInfo: {
                 car: visitorCar,
-                departureAddress: req.body.location.label,
-                arrivalAddress: req.body.arrival.label,
+                departureAddress: req.body.location,
+                arrivalAddress: req.body.arrival,
                 categories : visitorCategory
             },
             road: undefined,
