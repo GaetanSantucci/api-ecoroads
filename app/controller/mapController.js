@@ -95,8 +95,9 @@ async function createMap(req, res) {
             }
         });
         geoJson.road.pop();
+        geoJson.road = geoJson.road.filter((option) => option)
 
-        return res.status(200).json(geoJson.filter((option) => option));
+        return res.status(200).json(geoJson);
     } catch (err) {
         _500(err, req, res);
     }
