@@ -78,9 +78,32 @@ On initialise NPM
 ```
 Installation des modules necessaires
 ```shell
-    npm i express joi cookie-parser dotenv cors brcypt jsonwebtoken pg swagger-ui-express swagger-jsdoc
+    npm i 
 ```
 
 Recommandations modules de developpement
 ```shell
-npm i --save-dev nodemon jest debug 
+npm i --save-dev nodemon jest debug
+```
+
+## INITIALISATION BDD SQITCH 
+
+Installation de sqitch : <br>
+Télécharger et installer le logiciel, puis la database souhaitée dispo ici [sqitch](https://sqitch.org/download/)
+
+Une fois installé, ouvrir le terminal et se positionner dans le dossier migration, 2 façons de faire :<br>
+- Conserver le fichier init.shg et supprimer tout le reste qui se trouve dans le dossier (deploy, revert, verify, sqitch.plan sqitch.config, deploy.sh )
+<br>
+Ouvrir son terminal, se positionner dans le dossier migration puis taper la commande suivante
+
+```shell
+sh init.sh 
+ou 
+chmod +x init.sh
+```
+selon les différents IOS .br
+
+
+
+
+

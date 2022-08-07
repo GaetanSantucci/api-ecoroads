@@ -124,16 +124,15 @@ async function createData(userData) {
 // ~ *************************** ~ //
 
 async function updateData(userId, userData) {
-    console.log("🚀 ~ file: user.js ~ line 131 ~ updateData ~ userData", userData);
     const { email, password, username, location, car_id } = userData;
 
     const sql = {
         text: `
             UPDATE "${TABLE_NAME}"
                 SET
-                "email" = COALESCE( $1, "email" )::email,
-                "password" = COALESCE( $2, "password" )::TEXT,
-                "username" = COALESCE( $3, "username" )::TEXT,
+                "email" = COALESCE(( $1 )::EMAIL, email),
+                "password" = COALESCE(( $2 )::TEXT, password),
+                "username" = COALESCE(( $3 )::TEXT, username),
                 "location_id" = COALESCE(( $4 )::INT, "location_id"),
                 "car_id" = COALESCE (( $5 )::INT, "car_id"),
                 "updated_at" = NOW()

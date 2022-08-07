@@ -209,13 +209,16 @@ async function updateUser(req, res) {
             return res.status(500).json({ error: `${email} invalide !` });
         }
 
-        if (password) {
+        if(password === "") {
+            req.body.password = user.rows[0].password;
+        }else{
+            console.log("please test");
             if (!schema.validate(password))
-                return res
-                    .status(500)
-                    .json({
-                        error: "Le mot de passe doit contenir au moins 6 caractères, une majuscule et un caractère spécial.",
-                    });
+            return res
+            .status(500)
+            .json({
+                error: "Le mot de passe doit contenir au moins 6 caractères, une majuscule et un caractère spécial.",
+            });
             req.body.password = await bcrypt.hash(password, 10);
         }
 
