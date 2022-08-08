@@ -1,6 +1,7 @@
 import { _400, _404, _500 } from "./errorController.js";
 import { InterestingPoint } from "../model/interestingPoint.js";
 import { Car } from "../model/car.js";
+import { Road } from "../model/road.js";
 import { Category } from "../model/category.js";
 import { polygonArea } from "../utils/polygon.js";
 import * as geolib from "geolib";
@@ -12,12 +13,34 @@ async function createMap(req, res) {
         // recuperer les infos des modales via un req.body
         const { location, arrival, categories, car_id } = req.body;
         const departure = { lat: location.Lat, lng: location.Long };
-
+    
         // POI en fonction des categories
         const interesting = await InterestingPoint.findInterestingPointCategories(categories);
         const networks = await InterestingPoint.findChargingStationByNetwork(car_id);
         const visitorCar = await Car.findOneCar(car_id);
         const visitorCategory = await Category.findCategoryVisitor(categories)
+        
+        const userId = req.user.id;
+        
+        if(userId){
+            const road = {
+                location : {
+                    label: req.body.location.label,
+                    lat: req.body.location.Lat,
+                    lon: req.body.location.Long
+                },
+            arrival : { 
+                label: req.body.arrival.label,
+                lat: req.body.arrival.Lat,
+                lon: req.body.arrival.Long
+            },
+            car : visitorCar,
+            categories: visitorCategory
+        }
+        const result = await Road.createRoad(userId, road);
+        console.log("🚀 ~ file: mapController.js ~ line 32 ~ createMap ~ result", result)
+    }
+
 
         const polygon = polygonArea(location, arrival);
 

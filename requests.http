@@ -1,7 +1,7 @@
 //@entrypoint=https://eco-roads.herokuapp.com/api/v1
 @entrypoint=http://localhost:5000/api/v1
 
-@accessToken=Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZiMmM3ZDY4LTdkYzctNDFjNC1iNzI1LWIyNjIwM2Q1YmIzMiIsImVtYWlsIjoidGVzdDFAZ21haWwuY29tIiwidXNlcm5hbWUiOiJSb3Jvbm8iLCJsb2NhdGlvbl9pZCI6ODQsImNhcl9pZCI6OSwiY3JlYXRlZF9hdCI6IjIwMjItMDgtMDdUMTE6MjE6MDIuNDE0WiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTY1OTg4MTM2OCwiZXhwIjoxNjU5ODgyNTY4fQ.U-u2At-t5w4gtDAzbMOH0KbUiK-vSpNVOLC1kW3z-9Q
+@accessToken=Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImUxNTZiYzRkLTc4ZDYtNGI2ZC1iNGYxLWNiOTdjYTAxMjJlOCIsImVtYWlsIjoibWlndWVsQGdtYWlsLmNvbSIsInVzZXJuYW1lIjoiUm9yb25vIiwibG9jYXRpb25faWQiOjg0LCJjYXJfaWQiOjksImNyZWF0ZWRfYXQiOiIyMDIyLTA4LTA4VDA5OjI5OjAzLjUwMVoiLCJ1cGRhdGVkX2F0IjpudWxsLCJpYXQiOjE2NTk5NTA5NTEsImV4cCI6MTY1OTk1MjE1MX0.ALKzgR8ggFEoq27tIcpaFpNsnj6xEkB3ZEAZVwYV_gM
 
 @refreshToken=Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjJmMGRkZjBiLWEwYWEtNGE0MC1iM2VlLWNkMzQwNTkzOTEyYiIsImVtYWlsIjoidGVzdDEwQGdtYWlsLmNvbSIsInVzZXJuYW1lIjoidGVzdCIsImxvY2F0aW9uX2lkIjoxMywiY2FyX2lkIjoxMiwiY3JlYXRlZF9hdCI6IjIwMjItMDgtMDFUMTc6NDg6MzMuMzY1WiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTY1OTM3NjI3NCwiZXhwIjoxNjU5Mzc2NTc0fQ.RU55u7c4WvkGG2kBvPxddY21VIRNKlTP7DbOa03hBPA
 
@@ -13,29 +13,34 @@
 GET {{entrypoint}}/team
 
 ###
+GET {{entrypoint}}/roads
+{{accessToken}}
+
+###
 POST {{entrypoint}}/map
 Content-Type: application/json
+{{accessToken}}
 
 {
-        "categories": [4,5,6],
-        "car_id": 8,
+        "categories": [1,2],
+        "car_id": 16,
         "location":{
             "label": "25 rue de Fort Boyard, 17000 La Rochelle",
             "address": "Rue de Fort Boyard",
             "street_number": 15,
             "zipcode": 17000,
             "city": "La Rochelle",
-            "Lat": 47.240846456654275,
-            "Long": -1.5359264684719047
+            "Lat": 41.240846456654275,
+            "Long": -1.535926468471904
     },
     "arrival": {
-            "label": "108 rue de bellevue, 33000 Bordeaux",
+            "label": "104 rue des alcoolos, 33000 Bordeaux",
             "address": "Rue de bellevue",
             "street_number": 108,
             "zipcode": 33000,
             "city": "Bordeaux",
-            "Lat": 48.652928491168424,
-            "Long": -2.0058590105327387
+            "Lat": 44.12928491168424,
+            "Long": -2.2058590105327387
     }
 }
 
@@ -51,7 +56,7 @@ POST {{entrypoint}}/user/register
 Content-Type: application/json
 
 {
-    "email": "test111@gmail.com",
+    "email": "miguel@gmail.com",
     "password": "Onepiece63!",
     "username": "Rorono",
     "car_id": 9,
@@ -80,7 +85,7 @@ POST {{entrypoint}}/user/login
 Content-Type: application/json
 
 {
-    "email": "test1@gmail.com",
+    "email": "miguel@gmail.com",
     "password": "Onepiece63!"
 }
 

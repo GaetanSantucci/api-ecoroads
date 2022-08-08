@@ -4,10 +4,11 @@ import { Router } from 'express';
 const router = Router();
 
 import { createMap } from '../controller/mapController.js';
+import { authenticateToken } from '../middleware/auth.js';
 
 // ROUTES CAR
 
-router.post('/map', createMap);
+router.post('/map', authenticateToken, createMap);
 
 
 export { router };

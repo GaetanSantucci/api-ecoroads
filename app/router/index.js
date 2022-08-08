@@ -7,21 +7,15 @@ router.get("/", (req, res) => {
     );
 });
 
-
-
-// USER ROUTE
 import { router as userRouter } from "./users.js";
 router.use("/api/v1", userRouter);
 
-// CAR ROUTES
 import { router as carRouter } from "./car.js";
 router.use("/api/v1", carRouter);
 
-//BRAND ROUTER
 import { router as brandRouter } from "./brand.js";
 router.use("/api/v1", brandRouter);
 
-//CATEGORY ROUTES
 import { router as categoryRouter } from "./category.js";
 router.use("/api/v1", categoryRouter);
 
@@ -31,8 +25,7 @@ router.use("/api/v1", locationRouter);
 import { router as teamRouter } from "./team.js";
 router.use("/api/v1", teamRouter);
 
-// ROAD ROUTES
-// import { router as roadRouter } from "./road.js";
-// router.use("/api/v1", roadRouter);
+import { router as roadRouter } from "./road.js";
+router.use("/api/v1", roadRouter);
 
 export { router };

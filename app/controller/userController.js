@@ -62,10 +62,7 @@ async function fetchOneUser(req, res) {
         if (!userId) return res.status(401).json({ error: "Autorisation refusée" });
         const user = await User.findOneProfile(userId, "id");
         
-        console.log("dans le user profile ligne 65",{refresh :  req.cookies.refreshToken});
         delete req.cookies.refreshToken;
-        
-        console.log("dans le user profile  ligne 68", req.cookies);
         
         if (user) res.status(200).json(user.rows[0]);
         else throw new Error({ error: "L'utilisateur n'existe pas" });
@@ -74,7 +71,6 @@ async function fetchOneUser(req, res) {
         return _500(err, req, res);
     }
     req.session.user = req.user
-    console.log("req.user dans user porfil", req.session.user);
 }
 
 // ------------------------------------------------------- LOGIN USER
@@ -115,9 +111,6 @@ async function loginUser(req, res) {
             maxAge: 24 * 60 * 60 * 1000
         });
 
-        
-        console.log(req.cookies);
-        
         res.status(200).send({ accessToken : accessToken});
     } catch (err) {
         return _500(err, req, res);
@@ -212,7 +205,6 @@ async function updateUser(req, res) {
         if(password === "") {
             req.body.password = user.rows[0].password;
         }else{
-            console.log("please test");
             if (!schema.validate(password))
             return res
             .status(500)
@@ -257,7 +249,6 @@ async function refreshToken(req, res) {
     }
     jwt.verify(req.session.refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
         if (err) {
-            console.log("🚀 ~ file: userController.js ~ line 246 ~ jwt.verify ~ err", err)
             return res.status(401).json(`L'utilisateur n'existe pas`);
         }
         delete user.iat;
